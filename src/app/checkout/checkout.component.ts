@@ -68,9 +68,9 @@ export class CheckoutComponent implements OnInit {
 
   autofill() {
     var address = new Address();
-    address.address1 = "3764 Elvis Presley Boulevard";
-    address.first_name = "Elvis ";
-    address.last_name="Presley";
+    address.address1 = "3764 Present Boulevard";
+    address.first_name = "Andrea ";
+    address.last_name="Silva";
     address.city="Memphis";
     address.country="country";
     address.state="Tennessee";
@@ -82,7 +82,7 @@ export class CheckoutComponent implements OnInit {
     this.checkout_payload.payment.card_expiry_date = {year:2022, month:12, day:12};
     //this.get('endDate').setValue(...)
 
-    this.checkout_payload.payment.name_on_card="Elvis Presley";
+    this.checkout_payload.payment.name_on_card="Andrea Silva";
     this.checkout_payload.payment.credit_card_number="1122-3344-5566-7788"
    }
 
