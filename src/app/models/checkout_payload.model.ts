@@ -32,8 +32,7 @@ export class Promotion {
     }
 }
 export class Address {
-    first_name: string;
-    last_name: string;
+    name: string;
     address1: string;
     address2: string;
     city: string

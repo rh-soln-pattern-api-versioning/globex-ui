@@ -92,18 +92,11 @@
               </div>
               <div class="row g-3">
                 <div class="col-sm-6">
-                  <label for="firstName" class="form-label">First name</label>
+                  <label for="firstName" class="form-label">Name</label>
                     <input type="text" class="form-control" id="bill.name"
-                       [(ngModel)]="checkout_payload.billing_address.first_name" 
-                       required name="checkout_payload.billing_address.first_name" #name="ngModel"/>
+                       [(ngModel)]="checkout_payload.billing_address.name" 
+                       required name="checkout_payload.billing_address.name" #name="ngModel"/>
                   <!-- <div [hidden]="name.valid || name.pristine" class="error"> Name is required </div> -->
-                </div>
-
-                <div class="col-sm-6">
-                  <label for="lastName" class="form-label">Last name</label>
-                  <input type="text" class="form-control" id="bill.lastname" placeholder=""  [(ngModel)]="checkout_payload.billing_address.last_name" 
-                  required name="checkout_payload.billing_address.last_name" #lastname="ngModel"/>
-                  <!-- <div [hidden]="lastname.valid || lastname.pristine" class="error"> Last Name is required </div> -->
                 </div>
 
                 <div class="col-sm-6">
@@ -178,16 +171,9 @@
                 <h4 class="mb-3" >Shipping address</h4>
 
                 <div class="col-sm-6">
-                  <label for="firstName" class="form-label">First name</label>
-                  <input type="text" class="form-control" id="ship.firstName" placeholder=""  [(ngModel)]="checkout_payload.shipping_address.first_name" 
-                  required name="checkout_payload.shipping_address.first_name" #name="ngModel"/>
-                  
-                </div>
-
-                <div class="col-sm-6">
-                  <label for="lastName" class="form-label">Last name</label>
-                  <input type="text" class="form-control" id="ship.lastName" placeholder=""  [(ngModel)]="checkout_payload.shipping_address.last_name" 
-                  required name="checkout_payload.shipping_address.last_name" #name="ngModel"/>
+                  <label for="firstName" class="form-label">Name</label>
+                  <input type="text" class="form-control" id="ship.name" placeholder=""  [(ngModel)]="checkout_payload.shipping_address.name" 
+                  required name="checkout_payload.shipping_address.name" #name="ngModel"/>
                   
                 </div>
 
