@@ -82,7 +82,7 @@ export class CheckoutComponent implements OnInit {
     this.checkout_payload.payment.card_expiry_date = {year:2022, month:12, day:12};
     //this.get('endDate').setValue(...)
 
-    this.checkout_payload.payment.name_on_card="Andres Silva";
+    this.checkout_payload.payment.name_on_card="Andrea Silva";
     this.checkout_payload.payment.credit_card_number="1122-3344-5566-7788"
    }
 
