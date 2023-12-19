@@ -73,6 +73,10 @@
                 <strong>{{ getTotalCartValue() | currency }}</strong>
               </li>
               <li class="list-group-item d-flex justify-content-between" *ngIf="coolstoreCookiesService.user.isUserLoggedIn">
+                <textarea placeholder="Delivery instructions" style="height: 70px; width: 100% !important;" 
+                [(ngModel)]="checkout_payload.deliver_instructions" ></textarea>
+              </li>
+              <li class="list-group-item d-flex justify-content-between" *ngIf="coolstoreCookiesService.user.isUserLoggedIn">
               <button class="w-100 btn btn-success btn-lg mt-10" [disabled]="!heroForm.form.valid" type="submit"
                  (click)="placeOrder()">
                 Submit Order

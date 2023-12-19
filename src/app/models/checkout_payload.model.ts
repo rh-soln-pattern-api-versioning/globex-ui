@@ -7,6 +7,7 @@ export class CheckoutPayload {
     currency: Currency;
     payment: Payment;
     line_items: LineItem[];
+    deliver_instructions: string;
     constructor() {
         this.promotion = new Promotion();
         this.billing_address = new Address();
