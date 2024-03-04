@@ -29,17 +29,10 @@ export class ProductRecommendationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.testBrowser) {
-      this.fetchRecommendedProducts();
-    }
+    
   }
 
   
-  fetchRecommendedProducts() {
-    this.coolStoreService.getRecommendedProducts()
-      .subscribe(products => (this.recommendedProducts = products));
-      
-  }
 
 
 }

@@ -26,15 +26,12 @@ export function app(): express.Express {
   //client UI to SSR calls
   const ANGULR_API_GETPAGINATEDPRODUCTS =  '/api/getPaginatedProducts';
   const ANGULR_API_GETPAGINATEDPRODUCTS_LIMIT = 8
-  const ANGULR_API_GETRECOMMENDEDPRODUCTS =  '/api/getRecommendedProducts'
   const ANGULR_API_TRACKUSERACTIVITY = '/api/trackUserActivity'
   const ANGULR_API_GETPRODUCTDETAILS_FOR_IDS = '/api/getProductDetailsForIds'
   const ANGULR_API_PLACEORDER = '/api/placeOrder'
   const ANGULR_HEALTH = '/health';
 
 
-  const RECOMMENDED_PRODUCTS_LIMIT = get('RECOMMENDED_PRODUCTS_LIMIT').default(5).asInt();
-  
   const NODE_ENV = get('NODE_ENV').default('dev').asEnum(['dev', 'prod']);
   const LOG_LEVEL = get('LOG_LEVEL').asString();
 
@@ -47,10 +44,9 @@ export function app(): express.Express {
   const API_TRACK_USERACTIVITY = get('API_TRACK_USERACTIVITY').default('http://d8523dbb-977d-4d5c-be98-aef3da676192.mock.pstmn.io/track').asString();  
   const API_GET_PAGINATED_PRODUCTS = get('API_GET_PAGINATED_PRODUCTS').default('http://3ea8ea3c-2bc9-45ae-9dc9-73aad7d8eafb.mock.pstmn.io/services/products').asString();  
   const API_GET_PRODUCT_DETAILS_BY_IDS = get('API_GET_PRODUCT_DETAILS_BY_IDS').default('http://3ea8ea3c-2bc9-45ae-9dc9-73aad7d8eafb.mock.pstmn.io/services/product/list/').asString();  
-  const API_CATALOG_RECOMMENDED_PRODUCT_IDS = get('API_CATALOG_RECOMMENDED_PRODUCT_IDS').default('http://e327d0a8-a4cc-4e60-8707-51a295f04f76.mock.pstmn.io/score/product').asString();
   const API_TRACK_PLACEORDER = get('API_TRACK_PLACEORDER').default('https://webhook.site/166967de-8685-49e7-bc98-4e9b0009afdf').asString();
 
-  const API_USER_KEY_NAME = get('USER_KEY').default('api_key').asString();
+  const API_USER_KEY_NAME = get('USER_KEY').default('user_key').asString();
   const API_USER_KEY_VALUE = get('API_USER_KEY_VALUE').default('8efad5cc78ecbbb7dbb8d06b04596aeb').asString();
 
   // Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)
@@ -76,10 +72,7 @@ export function app(): express.Express {
   const bodyParser = require('body-parser');
   const axios = require('axios');
   
-  if(API_MANAGEMENT_FLAG && API_MANAGEMENT_FLAG =='YES') {
-    axios.defaults.headers.common[API_USER_KEY_NAME] = API_USER_KEY_VALUE // for all requests
-  }
-
+  
   server.use(bodyParser.json());
   server.use(bodyParser.urlencoded({extended: true}) );
   
@@ -108,35 +101,6 @@ export function app(): express.Express {
   });
 
 
-  // Get Product Details for the comma separated Product IDs string
-  server.get(ANGULR_API_GETRECOMMENDEDPRODUCTS, (req, res) => {
-    //console.debug('SSR:::: erEnvConfig.ANGULR_API_GETRECOMMENDEDPRODUCTS ' + ANGULR_API_GETRECOMMENDEDPRODUCTS+ ' invoked');
-    var commaSeparatedProdIds;
-    var recommendedProducts= [];
-    var getRecommendedProducIdsURL = API_CATALOG_RECOMMENDED_PRODUCT_IDS;
-    var getProdDetailsByIdURL = API_GET_PRODUCT_DETAILS_BY_IDS;
-    var getRecommendedProducts;
-    axios
-      .get(getRecommendedProducIdsURL)
-      .then(response => {
-        getRecommendedProducts =  response.data;
-        //console.debug("getRecommendedProducts ID", getRecommendedProducts )
-
-        //get a list of Product Ids from the array sent
-        var prodArray = getRecommendedProducts.map(s=>s.productId);        
-
-        commaSeparatedProdIds = prodArray.toString();
-        //console.debug("commaSeparatedProdIds", commaSeparatedProdIds);
-
-        return axios.get(getProdDetailsByIdURL + commaSeparatedProdIds);
-      })
-      .then(response => {
-        var prodDetailsArray = response.data;
-        var returnData = getRecommendedProducts.map(t1 => ({...t1, ...prodDetailsArray.find(t2 => t2.itemId === t1.productId)}))
-        returnData = returnData.slice(0,RECOMMENDED_PRODUCTS_LIMIT);
-        res.send(returnData);
-      }).catch(error => { console.log("ANGULR_API_GETRECOMMENDEDPRODUCTS", error); });
-  });
   
   
   // Get Product Details based on Product IDs
@@ -157,31 +121,19 @@ export function app(): express.Express {
   // Save user activity
   
   server.post(ANGULR_API_TRACKUSERACTIVITY, (req, res) => {
-    console.log('SSR::::' + ANGULR_API_TRACKUSERACTIVITY+ ' invoked');
-    var url = API_TRACK_USERACTIVITY;
-    axios
-      .post(url, req.body)
-      .then(response => {
-        res.send(response.data);
-      })
-      .catch(
-        (reason: AxiosError<{additionalInfo:string}>) => {
-          if (reason.response!.status === 400) {
-            // Handle 400
-            res.send("error:reason.response!.status " + reason.response!.status);
-          } else {
-            res.send("error:reason.response!.status " + reason.response!.status);
-          }
-          console.log("ANGULR_API_TRACKUSERACTIVITY AxiosError", reason.message)
-        }
-      );
+    console.log('SSR::::' + ANGULR_API_TRACKUSERACTIVITY+ ' invoked (dummy call)');
+    //
   });
 
    // Place Order API call
   
    server.post(ANGULR_API_PLACEORDER, (req, res) => {
     var url = API_TRACK_PLACEORDER; 
-    console.log('SSR::::' + ANGULR_API_PLACEORDER+ ' invoked');
+    if(API_MANAGEMENT_FLAG && API_MANAGEMENT_FLAG =='YES') {
+      url = url + "?" + API_USER_KEY_NAME + "=" + API_USER_KEY_VALUE;
+    }
+  
+    console.log('SSR::::' + ANGULR_API_PLACEORDER+ ' invoked with URL' + url);
     axios
       .post(url, req.body)
       .then(response => {

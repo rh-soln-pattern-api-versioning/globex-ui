@@ -1,24 +1,40 @@
 # GlobexUi
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.5.
-This also has "Server-side rendering (SSR) with Angular Universal" enables. Read more about this here: https://angular.io/guide/universal
 
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Running on Server Side
+## Running in local
 
 Run `npm run dev:ssr` for running this as server side app. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## ENV variables
 
-## Build
+API_MANAGEMENT_FLAG=YES
+API_USER_KEY_NAME
+API_USER_KEY_VALUE
+API_GET_PAGINATED_PRODUCTS
+API_GET_PRODUCT_DETAILS_BY_IDS
+API_TRACK_PLACEORDER
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Docker
+
+docker build . -t quay.io/rh_soln_pattern_api_versioning/globex-ui:9f9edd0 -t quay.io/rh_soln_pattern_api_versioning/globex-ui:v1.1
+
+docker push quay.io/rh_soln_pattern_api_versioning/globex-ui:9f9edd0
+docker push quay.io/rh_soln_pattern_api_versioning/globex-ui:v1.1
+
+
+
+docker build . -t quay.io/rh_soln_pattern_api_versioning/globex-ui:v1.1 -t quay.io/rh_soln_pattern_api_versioning/globex-ui:v1.1
+docker push quay.io/rh_soln_pattern_api_versioning/globex-ui:v1.1
+
+
+docker build .  -t quay.io/rh_soln_pattern_api_versioning/globex-ui:86955bc -t quay.io/rh_soln_pattern_api_versioning/globex-ui:v2.0
+docker push quay.io/rh_soln_pattern_api_versioning/globex-ui:86955bc
+docker push quay.io/rh_soln_pattern_api_versioning/globex-ui:v2.0
+
+
+
+docker build . -t quay.io/rh_soln_pattern_api_versioning/globex-ui:latest
+docker push quay.io/rh_soln_pattern_api_versioning/globex-ui:latest
