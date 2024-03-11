@@ -3,22 +3,16 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.5.
 This also has "Server-side rendering (SSR) with Angular Universal" enables. Read more about this here: https://angular.io/guide/universal
 
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
 ## Running on Server Side
 
 Run `npm run dev:ssr` for running this as server side app. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+## Build docker image
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+docker build . -t	quay.io/rh_soln_pattern_api_versioning/globex-ui:<version>
 
-## Further help
+## Push docker 
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+docker push quay.io/rh_soln_pattern_api_versioning/globex-ui:<version>
