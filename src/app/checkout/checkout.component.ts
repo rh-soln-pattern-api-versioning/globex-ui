@@ -69,8 +69,7 @@ export class CheckoutComponent implements OnInit {
   autofill() {
     var address = new Address();
     address.address1 = "3764 Present Boulevard";
-    address.first_name = "Andrea ";
-    address.last_name="Silva";
+    address.name = "Andrea Silva";
     address.city="Memphis";
     address.country="country";
     address.state="Tennessee";
