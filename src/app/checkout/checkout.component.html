@@ -6,8 +6,10 @@
   Please login to place order.
 </div>
 
-
-
+<div class="alert alert-info"  *ngIf="orderBeingPlaced">
+  <i class="fa fa-spinner fa-fw fa-xl margin-right-md fa-spin" style="color: black;--fa-animation-duration: 2s;"></i>
+  Your order is being processed.
+</div>
 
 <div class="container-fluid" *ngIf="productsInCart.length == 0 && !(order && order.newOrderPlaced)">
       <div class="row">

@@ -7,12 +7,10 @@ This also has "Server-side rendering (SSR) with Angular Universal" enables. Read
 
 Run `npm run dev:ssr` for running this as server side app. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-
-
 ## Build docker image
 
-docker build . -t	quay.io/rh_soln_pattern_api_versioning/globex-ui:<version>
+podman build . -t quay.io/rh_soln_pattern_api_versioning/globex-ui:<version>
 
 ## Push docker 
 
-docker push quay.io/rh_soln_pattern_api_versioning/globex-ui:<version>
+podman push quay.io/rh_soln_pattern_api_versioning/globex-ui:wip
